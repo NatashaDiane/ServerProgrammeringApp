@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+
+<project default="BuildAll" name="JavaEE Wildfly Server Build">
+
+	<property name="bin" value="./bin" />
+
+	<property name="lib" value="./lib" />
+
+	<property name="src" value="./src" />
+
+	<property name="client-dist" value="./dist" />
+	
+	<property name="html" value="./WebContent" />
+
+	<!-- select a line that points to the path of your server deployment folderWINDOWS VERSION:<property name="server-dist" value="C:\Progra~1\wildfly\wildfly-10.0.0.Final\standalone\deployments"/>MAC/LINUX VERSION:<property name="server-dist" value="/opt/wildfly/wildfly/wildfly-10.0.0.Final/standalone/deployments"/> -->
+
+
+	<property name="server-dist" value="C:\opt\jboss\wildfly\standalone\deployments" />
+
+	<property name="server-jarfile" value="${server-dist}/ServerProgrammeringApp.jar" />
+
+	<property name="client-jarfile" value="${client-dist}/ServerProgrammeringClasses.jar" />
+
+	<property name="warfile" value="${server-dist}/ServerProgrammering.war" />
+
+
+	<path id="my.classpath">
+
+		<pathelement path="${java.class.path}" />
+
+		<pathelement location="${bin}" />
+
+
+		<fileset dir="${lib}">
+
+			<include name="*.jar" />
+
+		</fileset>
+
+	</path>
+
+
+	<target name="BuildAll" description="Complete rebuild." depends="clean, prep, compile, serverjar,clientjar, war">
+
+		<echo message="Build complete." />
+
+	</target>
+
+
+	<target name="classpath">
+
+		<property name="current.classpath" refid="my.classpath" />
+
+		<echo level="info">Classpath is :${current.classpath} </echo>
+
+	</target>
+
+
+	<target name="clean">
+
+		<delete dir="${bin}" />
+
+		<delete dir="${client-dist}" />
+
+	</target>
+
+
+	<target name="prep">
+
+		<mkdir dir="${bin}" />
+
+		<mkdir dir="${client-dist}" />
+
+	</target>
+
+
+	<target name="compile" description="Compile all Java classes" depends="prep">
+
+
+		<javac encoding="ISO-8859-1" debug="true" destdir="${bin}" srcdir="${src}">
+
+			<classpath refid="my.classpath" />
+
+		</javac>
+
+		<echo message="Compiled." />
+
+	</target>
+
+
+	<target name="serverjar" description="Build Server Jar files." depends="compile">
+
+
+		<jar basedir="${bin}" destfile="${server-jarfile}">
+
+
+			<metainf dir="${src}/META-INF">
+
+				<include name="beans.xml" />
+
+				<include name="persistence.xml" />
+
+			</metainf>
+
+		</jar>
+
+		<echo message="Built the server jar file." />
+
+	</target>
+
+
+	<target name="war" description="Build War file." depends="compile">
+
+
+		<copy todir="${bin}">
+
+
+			<fileset dir="${src}">
+
+				<include name="**/persistence.xml" />
+
+			</fileset>
+
+		</copy>
+
+
+		<war destfile="${warfile}" webxml="web.xml">
+
+			<classes dir="${bin}">
+			</classes>
+
+			<lib dir="${lib}" />
+			<fileset dir="${html}" />
+
+		</war>
+
+		<echo message="Built the war file." />
+
+	</target>
+
+
+	<target name="clientjar" description="Build Client Jar files." depends="compile">
+
+		<delete file="${client-jarfile}" />
+
+		<jar basedir="${bin}" destfile="${client-jarfile}" includes="com/serverprogrammering/domain/**,**/*Service*">
+		</jar>
+
+		<echo message="Built the client jar file." />
+
+	</target>
+
+</project>

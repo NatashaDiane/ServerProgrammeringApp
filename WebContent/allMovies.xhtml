@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<style type="text/css">
+.value {
+	font-weight: bold;
+}
+</style>
+</h:head>
+
+<h:body>
+	<h:form id="form">
+		<p:dataGrid var="movie" value="#{allMoviesPageBean.allMovies}"
+			columns="3" layout="grid" rows="12" paginator="true" id="allMovies"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="6,12,16">
+
+			<f:facet name="header">
+            Movies
+        </f:facet>
+
+
+			<p:panel header="#{movie.title}" style="text-align:center">
+				<h:panelGrid columns="1" style="width:100%;text-align:center">
+
+					<h:outputText value="#{movie.year}" />
+					<h:outputText value="#{movie.genre}" />
+
+					<h:outputLink value="movieDetail2.jsf" title="View Detail">
+						<f:param name="movieId" value="#{movie.id}" />
+						<h:outputText styleClass="ui-icon ui-icon-search"
+							style="margin:0 auto;" />
+
+					</h:outputLink>
+
+
+				</h:panelGrid>
+			</p:panel>
+
+
+		</p:dataGrid>
+
+
+	</h:form>
+</h:body>
+</html>

@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<f:metadata>
+	<f:viewParam name="movieId" value="#{findMoviePageBean.movieId}"/>
+	</f:metadata>
+</h:head>
+
+<h:body>
+	<h3>Movie Details</h3>
+	
+	<p>Title : #{findMoviePageBean.selectedMovie.title}</p>
+	<p>Director : #{findMoviePageBean.selectedMovie.director}</p>
+	<p>Stars : #{findMoviePageBean.selectedMovie.stars}</p>
+	<p>Running Time : #{findMoviePageBean.selectedMovie.runningTime}</p>
+	<p>Genre : #{findMoviePageBean.selectedMovie.genre}</p>
+	<p>Year : #{findMoviePageBean.selectedMovie.year}</p>
+	<p>Description : #{findMoviePageBean.selectedMovie.description}</p>
+</h:body>
+</html>

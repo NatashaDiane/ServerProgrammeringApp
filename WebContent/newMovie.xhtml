@@ -1,0 +1,34 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<h:body>
+	<h3>Add new Movie</h3>
+	<h:form>
+		<label>Title</label> <br/>
+		<h:inputText value="#{newMovie.title}" /> <br/>
+		
+		<label>Director</label> <br/>
+		<h:inputText value="#{newMovie.director}" /> <br/>
+		
+		<label>Stars</label> <br/>
+		<h:inputText value="#{newMovie.stars}" /> <br/>
+		
+		<label>Running Time</label> <br/>
+		<h:inputText value="#{newMovie.runningTime}" /> <br/>
+		
+		<label>Genre</label> <br/>
+		<h:inputText value="#{newMovie.genre}" /> <br/>
+		
+		<label>Year</label> <br/>
+		<h:inputText value="#{newMovie.year}" /> <br/>
+		
+		<label>Description</label> <br/>
+		<h:inputTextarea cols="30" rows="10" value="#{newMovie.description}" /> <br/>
+	</h:form>
+	
+</h:body>
+
+
+
+</html>
