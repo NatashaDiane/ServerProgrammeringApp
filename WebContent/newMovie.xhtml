@@ -25,6 +25,8 @@
 		
 		<label>Description</label> <br/>
 		<h:inputTextarea cols="30" rows="10" value="#{newMovie.description}" /> <br/>
+		
+		<h:commandButton value="Save" action="#{newMovie.createMovie}"></h:commandButton>
 	</h:form>
 	
 </h:body>
