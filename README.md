@@ -1,4 +1,4 @@
-# A Client-Server Application
+# A Client-Server Application 💻
 
 I created a client-server application that runs on Wildfly/JBoss to store information about movies I want to recommend or watch in the future: my personal "IMDb"!
 
